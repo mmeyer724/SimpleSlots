@@ -43,7 +43,7 @@ public class CommandHandler implements CommandExecutor {
 			}
 		}
 		if(commandMethod == null) {
-			error(sender, "No sub-command provided");
+			error(sender, "no sub-command provided.");
 			return false;
 		}
 
