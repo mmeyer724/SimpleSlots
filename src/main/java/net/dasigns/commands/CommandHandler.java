@@ -43,14 +43,18 @@ public class CommandHandler implements CommandExecutor {
 				return false;
 			}
 			
-			if(commandMethod == null) {
+			if(defaultMethod != null) {
 				commandMethod = defaultMethod;
 				ce = new CommandEvent(sender,command,label,args,true);
 			}
 		}
 
 		Cmd commandAnnotation = null;
-		for(Annotation a : commandMethod.getAnnotations()) if(a instanceof Cmd) commandAnnotation = (Cmd) a;
+		if(commandMethod.getAnnotations() == null) error(sender,"invalid command annotation.");
+		for(Annotation a : commandMethod.getAnnotations()) {
+			if(a == null) error(sender,"invalid command annotation.");
+			if(a instanceof Cmd) commandAnnotation = (Cmd) a;
+		}
 
 		if(commandAnnotation == null) {
 			error(sender,"invalid command annotation.");
