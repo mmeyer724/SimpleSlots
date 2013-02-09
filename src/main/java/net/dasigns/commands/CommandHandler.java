@@ -38,7 +38,7 @@ public class CommandHandler implements CommandExecutor {
 
 			if(commandMethod == null) {
 				for(Method m : commandClass.getMethods()) {
-					if(m.getName().equalsIgnoreCase("__default")) commandMethod = m;
+					if(m.getName().equalsIgnoreCase("defaultcmd")) commandMethod = m;
 					break;
 				}
 				if(commandMethod == null) {
@@ -49,7 +49,7 @@ public class CommandHandler implements CommandExecutor {
 		}
 
 		Cmd commandAnnotation = null;
-		if(commandMethod.getAnnotations().length < 1) {
+		if(commandMethod == null || commandMethod.getAnnotations().length < 1) {
 			error(sender,"invalid command annotation.");
 			return false;
 		}
