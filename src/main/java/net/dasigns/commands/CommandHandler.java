@@ -43,7 +43,7 @@ public class CommandHandler implements CommandExecutor {
 				return false;
 			}
 			
-			if(defaultMethod != null) {
+			if(defaultMethod != null && commandMethod == null) {
 				commandMethod = defaultMethod;
 				ce = new CommandEvent(sender,command,label,args,true);
 			}
