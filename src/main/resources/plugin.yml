@@ -2,3 +2,4 @@ name: SimpleSlots
 authors: [Mike724, Dakota628]
 version: ${version}
 main: com.mike724.simpleslots.SimpleSlots
+depends: [Vault]
