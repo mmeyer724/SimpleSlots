@@ -1,5 +1,7 @@
 package net.dasigns.commands;
 
+import java.util.Arrays;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -30,19 +32,27 @@ public class CommandEvent {
                 return SenderType.UNKNOWN;
         }
         
-        public Command getCommand() {
-                return command;
+        public Command getRawCommand() {
+        	return command;
         }
         
-        public String getCommandLabel() {
-                return commandLabel;
+        public String getSuperCommandLabel() {
+        	return commandLabel;
+        }
+        
+        public String getSuperCommandName() {
+                return command.getName();
+        }
+        
+        public String getSubCommandName() {
+                return args[0];
         }
         
         public String[] getArgs() {
-                return args;
+                return Arrays.copyOfRange(args, 1, args.length);
         }
         
         public Integer getNumberArgs() {
-                return args.length;
+                return args.length-1;
         }
 }
