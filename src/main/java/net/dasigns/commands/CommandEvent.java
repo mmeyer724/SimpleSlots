@@ -7,9 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-public class CommandEvent {
-        //TODO: Modify for new system
-	
+public class CommandEvent {	
         private CommandSender sender;
         private Command command;
         private String commandLabel;
