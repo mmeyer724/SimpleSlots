@@ -62,7 +62,7 @@ public class CommandHandler implements CommandExecutor {
 
 		if(Boolean.class.isAssignableFrom(commandMethod.getReturnType())) {
 			try {
-				return (boolean) commandMethod.invoke(commandClass, ce);
+				return (Boolean) commandMethod.invoke(commandClass, ce);
 			} catch (Exception e) {
 				error(sender,"interal error running command boolean!");
 				e.printStackTrace();
