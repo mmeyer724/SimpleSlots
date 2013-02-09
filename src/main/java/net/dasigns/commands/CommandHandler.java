@@ -40,11 +40,11 @@ public class CommandHandler implements CommandExecutor {
 
 		if(commandMethod == null) {
 			for(Method m : commandClass.getMethods()) {
-				if(m.getName().equalsIgnoreCase("defaultcmd")) commandMethod = m;
+				if(m.getName().equalsIgnoreCase("__default")) commandMethod = m;
 				break;
 			}
 			if(commandMethod == null) {
-				error(sender,"sub-command ("+args[0]+") does not exist and default command does not exist.");
+				error(sender,"sub-command does not exist and default command does not exist.");
 				return false;
 			} else ce = new CommandEvent(sender,command,label,args,true);
 		}
