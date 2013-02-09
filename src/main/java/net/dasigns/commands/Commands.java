@@ -2,7 +2,7 @@ package net.dasigns.commands;
 
 public class Commands {
 	public static class SimpleSlots {
-		@Cmd(permissions = "", senderType = SenderType.ANY)
+		@Cmd(permissions = "noperms", senderType = SenderType.ANY)
 		public static void __default(CommandEvent e) {
 			e.getSender().sendMessage(e.getSuperCommandName());
 		}

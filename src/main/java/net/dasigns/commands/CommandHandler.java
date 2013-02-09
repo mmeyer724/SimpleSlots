@@ -49,9 +49,12 @@ public class CommandHandler implements CommandExecutor {
 		}
 
 		Cmd commandAnnotation = null;
-		if(commandMethod.getAnnotations() == null) error(sender,"invalid command annotation.");
+		if(commandMethod.getAnnotations().length < 1) {
+			error(sender,"invalid command annotation.");
+			return false;
+		}
+		
 		for(Annotation a : commandMethod.getAnnotations()) {
-			if(a == null) error(sender,"invalid command annotation.");
 			if(a instanceof Cmd) commandAnnotation = (Cmd) a;
 		}
 
@@ -65,7 +68,7 @@ public class CommandHandler implements CommandExecutor {
 			return false;
 		}
 
-		if(commandAnnotation.permissions() != "" && !sender.hasPermission(commandAnnotation.permissions())) {
+		if(commandAnnotation.permissions() != "noperms" && !sender.hasPermission(commandAnnotation.permissions())) {
 			error(sender,"you do not have permission to run this command.");
 			return false;
 		}
