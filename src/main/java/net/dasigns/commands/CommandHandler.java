@@ -1,14 +1,12 @@
 package net.dasigns.commands;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class CommandHandler implements CommandExecutor {
 	@Override
@@ -30,16 +28,24 @@ public class CommandHandler implements CommandExecutor {
 			return false;
 		}
 		Method commandMethod = null;
+		Method defaultMethod = null;
 		if(args.length>0) {
 			for(Method m : commandClass.getMethods()) {
+				if(m.getName().equalsIgnoreCase("__default")) defaultMethod = m;
 				if(m.getName().equalsIgnoreCase(args[0])) {
 					commandMethod = m;
 					break;
 				}
 			}
-			if(commandMethod == null) {
-				error(sender,"sub-command ("+args[0]+")does not exist.");
+			
+			if(commandMethod == null && defaultMethod == null) {
+				error(sender,"sub-command ("+args[0]+") does not exist and default command does not exist.");
 				return false;
+			}
+			
+			if(commandMethod == null) {
+				commandMethod = defaultMethod;
+				ce = new CommandEvent(sender,command,label,args,true);
 			}
 		}
 		if(commandMethod == null) {
