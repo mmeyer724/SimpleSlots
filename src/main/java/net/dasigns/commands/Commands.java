@@ -10,7 +10,7 @@ public class Commands {
 		
 		@Cmd(permissions = "test.node", senderType = SenderType.ANY)
 		public static void test(CommandEvent e) {
-			e.getSender().sendMessage(e.getSubCommandName() + "Hi");
+			e.getSender().sendMessage(e.getSubCommandName());
 		}
 		
 	}
