@@ -36,17 +36,17 @@ public class CommandHandler implements CommandExecutor {
 					break;
 				}
 			}
+		}
 
-			if(commandMethod == null) {
-				for(Method m : commandClass.getMethods()) {
-					if(m.getName().equalsIgnoreCase("defaultcmd")) commandMethod = m;
-					break;
-				}
-				if(commandMethod == null) {
-					error(sender,"sub-command ("+args[0]+") does not exist and default command does not exist.");
-					return false;
-				} else ce = new CommandEvent(sender,command,label,args,true);
+		if(commandMethod == null) {
+			for(Method m : commandClass.getMethods()) {
+				if(m.getName().equalsIgnoreCase("defaultcmd")) commandMethod = m;
+				break;
 			}
+			if(commandMethod == null) {
+				error(sender,"sub-command ("+args[0]+") does not exist and default command does not exist.");
+				return false;
+			} else ce = new CommandEvent(sender,command,label,args,true);
 		}
 
 		System.out.println(commandMethod);
