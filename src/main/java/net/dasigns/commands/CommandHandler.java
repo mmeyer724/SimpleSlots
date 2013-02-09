@@ -55,11 +55,9 @@ public class CommandHandler implements CommandExecutor {
 			return false;
 		}
 
-		if(commandAnnotation.senderType() == SenderType.PLAYER) {
-			if(!((Player) sender).hasPermission(commandAnnotation.permissions())) {
-				error(sender,"you do not have permissions to run this command.");
-				return false;
-			}
+		if(!sender.hasPermission(commandAnnotation.permissions())) {
+			error(sender,"you do not have permissions to run this command.");
+			return false;
 		}
 
 		if(Boolean.class.isAssignableFrom(commandMethod.getReturnType())) {
