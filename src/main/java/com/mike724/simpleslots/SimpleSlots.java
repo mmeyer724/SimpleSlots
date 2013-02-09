@@ -1,5 +1,7 @@
 package com.mike724.simpleslots;
 
+import net.dasigns.commands.CommandHandler;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SimpleSlots extends JavaPlugin {
@@ -12,8 +14,9 @@ public class SimpleSlots extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		// TODO Auto-generated method stub
-		super.onEnable();
+		//Handle Commands
+		CommandHandler ch = new CommandHandler();
+		this.getCommand("simpleslots").setExecutor(ch);
 	}
 
 }
