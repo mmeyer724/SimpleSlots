@@ -48,10 +48,6 @@ public class CommandHandler implements CommandExecutor {
 				ce = new CommandEvent(sender,command,label,args,true);
 			}
 		}
-		if(commandMethod == null) {
-			error(sender, "no sub-command provided.");
-			return false;
-		}
 
 		Cmd commandAnnotation = null;
 		for(Annotation a : commandMethod.getAnnotations()) if(a instanceof Cmd) commandAnnotation = (Cmd) a;
