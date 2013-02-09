@@ -47,7 +47,10 @@ public class CommandHandler implements CommandExecutor {
 				} else ce = new CommandEvent(sender,command,label,args,true);
 			}
 		}
-
+		
+		System.out.println(commandMethod);
+		System.out.println()
+		
 		Cmd commandAnnotation = null;
 		if(commandMethod == null || commandMethod.getAnnotations().length < 1) {
 			error(sender,"invalid command annotation.");
@@ -68,7 +71,7 @@ public class CommandHandler implements CommandExecutor {
 			return false;
 		}
 
-		if(commandAnnotation.permissions() != "noperms" && !sender.hasPermission(commandAnnotation.permissions())) {
+		if(commandAnnotation.permissions() != "" && !sender.hasPermission(commandAnnotation.permissions())) {
 			error(sender,"you do not have permission to run this command.");
 			return false;
 		}
