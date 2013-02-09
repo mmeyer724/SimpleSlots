@@ -3,3 +3,8 @@ authors: [Mike724, Dakota628]
 version: ${version}
 main: net.dasigns.simpleslots.SimpleSlots
 depends: [Vault]
+commands:
+  simpleslots:
+    description: SimpleSlots main command.
+    aliases: [ss]
+    usage: Syntax error! Simply type /<command> help for help.

@@ -19,7 +19,7 @@ public class CommandHandler implements CommandExecutor {
 		Class<?> commandClass = null;
 
 		for(Class<?> cl : c.getClasses()) {
-			if(cl.getName().equalsIgnoreCase(command.getName())) {
+			if(cl.getSimpleName().equalsIgnoreCase(command.getName())) {
 				commandClass = cl;
 				break;
 			}
@@ -30,15 +30,20 @@ public class CommandHandler implements CommandExecutor {
 			return false;
 		}
 		Method commandMethod = null;
-		for(Method m : commandClass.getMethods()) {
-			if(m.getName().equalsIgnoreCase(args[0])) {
-				commandMethod = m;
-				break;
+		if(args.length>0) {
+			for(Method m : commandClass.getMethods()) {
+				if(m.getName().equalsIgnoreCase(args[0])) {
+					commandMethod = m;
+					break;
+				}
+			}
+			if(commandMethod == null) {
+				error(sender,"sub-command ("+args[0]+")does not exist.");
+				return false;
 			}
 		}
-
 		if(commandMethod == null) {
-			error(sender,"sub-command ("+args[0]+")does not exist.");
+			error(sender, "No sub-command provided");
 			return false;
 		}
 
@@ -50,7 +55,7 @@ public class CommandHandler implements CommandExecutor {
 			return false;
 		} 
 
-		if(ce.getSenderType() != commandAnnotation.senderType()) {
+		if(ce.getSenderType() != commandAnnotation.senderType() && commandAnnotation.senderType() != SenderType.ANY) {
 			error(sender,"invalid sender type.");
 			return false;
 		}
