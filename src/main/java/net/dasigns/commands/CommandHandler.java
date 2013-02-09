@@ -49,7 +49,6 @@ public class CommandHandler implements CommandExecutor {
 		}
 		
 		System.out.println(commandMethod);
-		System.out.println()
 		
 		Cmd commandAnnotation = null;
 		if(commandMethod == null || commandMethod.getAnnotations().length < 1) {
