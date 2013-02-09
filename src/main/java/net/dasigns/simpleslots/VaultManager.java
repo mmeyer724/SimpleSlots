@@ -7,9 +7,9 @@ import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 
 public class VaultManager {
-	public static Permission permission = null;
-	public static Economy economy = null;
-	public static Chat chat = null;
+	public Permission permission = null;
+	public Economy economy = null;
+	public Chat chat = null;
 	
 	private SimpleSlots plugin;
 	
@@ -17,7 +17,7 @@ public class VaultManager {
 		this.plugin = plugin;
 	}
 	
-	private boolean setupPermissions()
+	public boolean setupPermissions()
 	{
 		RegisteredServiceProvider<Permission> permissionProvider = plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
 		if (permissionProvider != null) {
@@ -26,7 +26,7 @@ public class VaultManager {
 		return (permission != null);
 	}
 
-	private boolean setupChat()
+    public boolean setupChat()
 	{
 		RegisteredServiceProvider<Chat> chatProvider = plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.chat.Chat.class);
 		if (chatProvider != null) {
@@ -36,7 +36,7 @@ public class VaultManager {
 		return (chat != null);
 	}
 
-	private boolean setupEconomy()
+	public boolean setupEconomy()
 	{
 		RegisteredServiceProvider<Economy> economyProvider = plugin.getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
 		if (economyProvider != null) {
