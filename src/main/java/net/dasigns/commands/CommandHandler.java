@@ -63,7 +63,7 @@ public class CommandHandler implements CommandExecutor {
 		}
 
 		if(commandAnnotation.permissions() != "" && !sender.hasPermission(commandAnnotation.permissions())) {
-			error(sender,"you do not have permissions to run this command.");
+			error(sender,"you do not have permission to run this command.");
 			return false;
 		}
 
