@@ -1,4 +1,4 @@
-package com.mike724.simpleslots;
+package net.dasigns.simpleslots;
 
 import net.dasigns.commands.CommandHandler;
 
