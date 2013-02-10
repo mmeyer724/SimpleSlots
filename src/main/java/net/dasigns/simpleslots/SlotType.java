@@ -58,4 +58,8 @@ public class SlotType {
 	public ItemStack getNextItem() {
 		return (ItemStack) wrg.next();
 	}
+	
+	public static Boolean slotTypeExists(String type) {
+		return Global.config.contains("types."+type);
+	}
 }

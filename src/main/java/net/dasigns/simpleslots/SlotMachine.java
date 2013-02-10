@@ -56,4 +56,8 @@ public class SlotMachine {
 	public String getName() {
 		return name;
 	}
+	
+	public static Boolean slotMachineExists(String name) {
+		return Global.config.contains("machines."+name);
+	}
 }
