@@ -29,7 +29,7 @@ public class Events implements Listener {
 	}
 	
 	public static void flipLever(final Block b) {
-		Global.plugin.getServer().getScheduler().runTaskLaterAsynchronously(Global.plugin, new Runnable() {
+		Global.plugin.getServer().getScheduler().runTaskLater(Global.plugin,new Runnable() {
 		    @Override 
 		    public void run() {
 		    	b.setData((byte)(b.getData()+8),true);
