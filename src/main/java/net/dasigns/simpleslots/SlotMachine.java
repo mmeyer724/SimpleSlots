@@ -1,9 +1,11 @@
 package net.dasigns.simpleslots;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 
 public class SlotMachine {
 	private ArrayList<Location> locs;
@@ -59,5 +61,19 @@ public class SlotMachine {
 	
 	public static Boolean slotMachineExists(String name) {
 		return Global.config.contains("machines."+name);
+	}
+	
+	public static SlotMachine getFromLever(Block b) {
+		Set<String> keys = Global.config.getConfigurationSection("machines").getKeys(false);
+		for(String k : keys) {
+			String parentNode = "machines."+k;
+			String leverNode = parentNode+".leverLoc";
+			World world = Global.plugin.getServer().getWorld(Global.config.getString(parentNode+".world"));
+			ArrayList<Integer> c = new ArrayList<Integer>();
+			String[] xyz = new String[] {"x","y","z"};
+			for(String s:xyz) c.add(Global.config.getInt(leverNode+"."+s));
+			if(new Location(world,c.get(0),c.get(1),c.get(2)).equals(b.getLocation())) return new SlotMachine(k);
+		}
+		return null;
 	}
 }

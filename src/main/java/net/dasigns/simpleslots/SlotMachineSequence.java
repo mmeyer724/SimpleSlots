@@ -17,6 +17,7 @@ public class SlotMachineSequence {
 	}
 	
 	public static Boolean isRunning(Block b) {
+		if(!running.containsKey(b)) return false;
 		return running.get(b);
 	}
 }
