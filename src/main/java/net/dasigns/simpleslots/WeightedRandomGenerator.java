@@ -7,7 +7,7 @@ public class WeightedRandomGenerator {
 	private ArrayList<Object> items;
 	private ArrayList<Integer> weights;
 	
-	WeightedRandomGenerator() {
+	public WeightedRandomGenerator() {
 		this.weight = 0;
 		this.items = new ArrayList<Object>();
 		this.weights = new ArrayList<Integer>();
