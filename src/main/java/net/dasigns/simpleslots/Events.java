@@ -23,7 +23,7 @@ public class Events implements Listener {
 			if ((b.getState().getRawData() & 0x8) == 0) {
 				e.getPlayer().sendMessage("Down");
 				SlotMachineSequence.start(b);
-				b.setData((byte)(b.getData()+8),true);
+				b.setData((byte)(b.getData()-8),true);
 			}
 		}
 	}
