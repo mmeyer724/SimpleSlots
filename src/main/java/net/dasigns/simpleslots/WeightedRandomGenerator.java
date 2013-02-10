@@ -36,6 +36,6 @@ public class WeightedRandomGenerator {
 		    random -= weights.get(i);
 		    if (random <= 0.0D) return items.get(i);
 		}
-		return -1;
+		return null;
 	}
 }
