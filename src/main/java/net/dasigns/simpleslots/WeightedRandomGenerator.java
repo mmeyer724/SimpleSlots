@@ -32,11 +32,10 @@ public class WeightedRandomGenerator {
 	
 	public Object next() {
 		double random = Math.random() * getTotalWeight();
-		for (int i=0;i<items.size();++i)
-		{
+		for (int i=0;i<items.size();++i) {
 		    random -= weights.get(i);
 		    if (random <= 0.0D) return items.get(i);
 		}
-		return -1;
+		return null;
 	}
 }
