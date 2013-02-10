@@ -2,7 +2,7 @@ name: SimpleSlots
 authors: [Mike724, Dakota628]
 version: ${version}
 main: net.dasigns.simpleslots.SimpleSlots
-depends: [Vault]
+depend: [Vault]
 commands:
   simpleslots:
     description: SimpleSlots main command.
