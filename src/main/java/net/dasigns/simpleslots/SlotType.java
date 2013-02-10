@@ -48,6 +48,12 @@ public class SlotType {
 	public Integer getNumFireworks() {
 		return fireworks;
 	}
+	
+	public ArrayList<ItemStack> getItems() {
+		ArrayList<ItemStack> i = new ArrayList<ItemStack>();
+		for(Object o : wrg.getItems()) i.add((ItemStack) o);
+		return i;
+	}
 
 	public ItemStack getNextItem() {
 		return (ItemStack) wrg.next();

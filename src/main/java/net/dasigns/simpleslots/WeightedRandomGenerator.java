@@ -30,6 +30,10 @@ public class WeightedRandomGenerator {
 		return weight;
 	}
 	
+	public ArrayList<Object> getItems() {
+		return items;
+	}
+	
 	public Object next() {
 		double random = Math.random() * getTotalWeight();
 		for (int i=0;i<items.size();++i) {
