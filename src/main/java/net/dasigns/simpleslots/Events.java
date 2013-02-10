@@ -17,14 +17,23 @@ public class Events implements Listener {
 			if(SlotMachineSequence.isRunning(b)) {
 				e.getPlayer().sendMessage(ChatColor.RED + "This slot machine is currently in use.");
 				e.setCancelled(true);
-				if ((b.getState().getRawData() & 0x8) == 0) b.setData((byte)(b.getData()+8),true);
+				if ((b.getState().getRawData() & 0x8) == 0) flipLever(b);
 				return;
 			}
 			if ((b.getState().getRawData() & 0x8) == 0) {
 				e.getPlayer().sendMessage("Down");
 				SlotMachineSequence.start(b);
-				b.setData((byte)(b.getData()-8),true);
+				flipLever(b);
 			}
 		}
+	}
+	
+	public static void flipLever(final Block b) {
+		Global.plugin.getServer().getScheduler().runTaskLaterAsynchronously(Global.plugin, new Runnable() {
+		    @Override 
+		    public void run() {
+		    	b.setData((byte)(b.getData()+8),true);
+		    }
+		}, 20L);
 	}
 }
