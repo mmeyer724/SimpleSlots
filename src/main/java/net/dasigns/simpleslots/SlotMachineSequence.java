@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.bukkit.block.Block;
 
 public class SlotMachineSequence {
-	private static HashMap<Block,Boolean> running;
+	private static HashMap<Block,Boolean> running = new HashMap<Block,Boolean>();
 	
 	public static void start(Block b) {
 		setRunning(b,true);
