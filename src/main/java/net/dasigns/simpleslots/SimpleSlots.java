@@ -34,6 +34,9 @@ public class SimpleSlots extends JavaPlugin {
 		//Setup command handler
 		CommandHandler ch = new CommandHandler();
 		this.getCommand("simpleslots").setExecutor(ch);
+		
+		//Setup events handler
+		this.getServer().getPluginManager().registerEvents(new Events(), this);
 	}
 
 }
