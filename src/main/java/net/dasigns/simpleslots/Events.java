@@ -1,5 +1,6 @@
 package net.dasigns.simpleslots;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -12,10 +13,16 @@ public class Events implements Listener {
 	@EventHandler
 	public void onPull(PlayerInteractEvent e) {
 		Block b = e.getClickedBlock();
-		e.getPlayer().sendMessage("On pull: " + (b.getState().getRawData() & 0x8));
 		if(e.getAction() == Action.RIGHT_CLICK_BLOCK && b.getType() == Material.LEVER){
-			if ((b.getState().getRawData() & 0x8) == 1) {
-				e.getPlayer().sendMessage("ON");
+			if(SlotMachineSequence.isRunning(b)) {
+				e.getPlayer().sendMessage(ChatColor.RED + "This slot machine is currently in use.");
+				e.setCancelled(true);
+				if ((b.getState().getRawData() & 0x8) == 0) b.setData((byte)(b.getData()+8),true);
+				return;
+			}
+			if ((b.getState().getRawData() & 0x8) == 0) {
+				e.getPlayer().sendMessage("Down");
+				b.setData((byte)(b.getData()+8),true);
 			}
 		}
 	}
