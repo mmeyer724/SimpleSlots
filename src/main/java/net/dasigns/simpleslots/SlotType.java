@@ -28,7 +28,7 @@ public class SlotType {
 				ItemStack i = null;
 				if(data.length < 2) break;
 				if(data.length == 2) i = new ItemStack(Integer.parseInt(data[0]),1,Short.parseShort(data[1]));
-				wrg.put(i, w);
+				wrg.add(i, w);
 			}
 		}
 	}
