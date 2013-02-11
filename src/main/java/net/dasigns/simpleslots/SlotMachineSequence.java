@@ -40,7 +40,7 @@ public class SlotMachineSequence {
 		ItemStack item3 = ItemFrameHelper.getFrame(slot.getThirdItemFrame().getBlock()).getItem();
 		
 		if(item1.equals(item2) && item2.equals(item3)) {
-			//TODO: Do something if when they win; config may need editing
+			//TODO: Do something if when they win
 		}
 		
 		b.setData((byte)(b.getData()+8),true);

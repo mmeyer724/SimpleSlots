@@ -1,26 +1,43 @@
 package net.dasigns.simpleslots;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import org.bukkit.inventory.ItemStack;
 
 public class SlotType {
 	private Integer cost;
-	private Integer reward;
-	private Integer fireworks;
-	private ArrayList<String> cmds;
+	
+	private HashMap<ItemStack,Integer> reward;
+	private HashMap<ItemStack,Integer> fireworks;
+	private HashMap<ItemStack,ArrayList<String>> cmds;
+	
 	private WeightedRandomGenerator wrg;
 
 
 	public SlotType(String type) {
+		reward = new HashMap<ItemStack,Integer>();
+		fireworks = new HashMap<ItemStack,Integer>();
 		wrg = new WeightedRandomGenerator();
+		
 		String typeNode = "types."+type;
 		String rewardNode = typeNode+".reward";
-
+		
 		cost = Global.config.getInt(typeNode + ".cost");
-		reward = Global.config.getInt(rewardNode+".money");
-		fireworks = Global.config.getInt(rewardNode+".fireworks");
-		cmds = new ArrayList<String>(Global.config.getStringList(rewardNode+".cmd"));
+		
+		Set<String> keys = null;
+		keys = Global.config.getConfigurationSection(rewardNode).getKeys(false);
+		for(String k : keys) {
+			String[] data = k.split(",");
+			ItemStack match = null;
+			if(data.length < 2) break;
+			if(data.length == 2) match = new ItemStack(Integer.parseInt(data[0]),1,Short.parseShort(data[1]));
+			
+			reward.put(match,Global.config.getInt(rewardNode+"."+k+".money"));
+			fireworks.put(match,Global.config.getInt(rewardNode+"."+k+".fireworks"));
+			cmds.put(match,new ArrayList<String>(Global.config.getStringList(rewardNode+"."+k+".cmd")));
+		}
 		
 		for(Integer w : Global.config.getIntegerList(typeNode+".items")) {
 			for(String s: Global.config.getStringList(typeNode+".items."+w)) {
@@ -37,16 +54,16 @@ public class SlotType {
 		return cost;
 	}
 
-	public Integer getRewardMoney() {
-		return reward;
+	public Integer getRewardMoney(ItemStack i) {
+		return reward.get(i);
 	}
 
-	public ArrayList<String> getRewardCmds() {
-		return cmds;
+	public ArrayList<String> getRewardCmds(ItemStack i) {
+		return cmds.get(i);
 	}
 
-	public Integer getNumFireworks() {
-		return fireworks;
+	public Integer getNumFireworks(ItemStack i) {
+		return fireworks.get(i);
 	}
 	
 	public ArrayList<ItemStack> getItems() {
