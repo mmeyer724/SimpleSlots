@@ -15,12 +15,16 @@ public class Events implements Listener {
 	public void onPull(PlayerInteractEvent e) {
 		Block b = e.getClickedBlock();
 		if(e.getAction() == Action.RIGHT_CLICK_BLOCK && b.getType() == Material.LEVER && SlotMachine.isSlotMachinePart(e.getClickedBlock())){
-			if(SlotMachineSequence.isRunning(b)) {
+			if(!e.getPlayer().hasPermission("slotmachines.use")) {
+				e.getPlayer().sendMessage(ChatColor.RED + "You do not have permission to use this slot machine.");
+				e.setCancelled(true);
+				return;
+			} else if(SlotMachineSequence.isRunning(b)) {
 				e.getPlayer().sendMessage(ChatColor.RED + "This slot machine is currently in use.");
 				e.setCancelled(true);
 				return;
 			}
-			if ((b.getState().getRawData() & 0x8) == 0) SlotMachineSequence.start(b);
+			if ((b.getState().getRawData() & 0x8) == 0) SlotMachineSequence.start(b,e.getPlayer());
 		}
 	}
 	
