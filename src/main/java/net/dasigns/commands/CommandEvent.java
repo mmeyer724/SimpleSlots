@@ -2,6 +2,8 @@ package net.dasigns.commands;
 
 import java.util.Arrays;
 
+import net.dasigns.simpleslots.Global;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;

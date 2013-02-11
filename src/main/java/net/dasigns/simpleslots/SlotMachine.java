@@ -47,6 +47,19 @@ public class SlotMachine {
 		return locs.get(2);
 	}
 	
+	public Location getItemFrame(Integer i) {
+		switch(i) {
+		case 1:
+			return getFirstItemFrame();
+		case 2:
+			return getSecondItemFrame();
+		case 3:
+			return getThirdItemFrame();
+		default:
+			return null;
+		}
+	}
+	
 	public Location getLever() {
 		return locs.get(3);
 	}
@@ -75,5 +88,17 @@ public class SlotMachine {
 			if(new Location(world,c.get(0),c.get(1),c.get(2)).equals(b.getLocation())) return new SlotMachine(k);
 		}
 		return null;
+	}
+	
+	public static Boolean isSlotMachinePart(Block b) {
+		Set<String> keys = Global.config.getConfigurationSection("machines").getKeys(false);
+		for(String k : keys) {
+			SlotMachine s = new SlotMachine(k);
+			if(s.getFirstItemFrame().equals(b.getLocation())) return true;
+			if(s.getSecondItemFrame().equals(b.getLocation())) return true;
+			if(s.getThirdItemFrame().equals(b.getLocation())) return true;
+			if(s.getLever().equals(b.getLocation())) return true;
+		}
+		return false;
 	}
 }

@@ -6,6 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class Events implements Listener {
@@ -17,23 +18,17 @@ public class Events implements Listener {
 			if(SlotMachineSequence.isRunning(b)) {
 				e.getPlayer().sendMessage(ChatColor.RED + "This slot machine is currently in use.");
 				e.setCancelled(true);
-				if ((b.getState().getRawData() & 0x8) == 0) flipLever(b);
 				return;
 			}
-			if ((b.getState().getRawData() & 0x8) == 0) {
-				e.getPlayer().sendMessage("Down");
-				SlotMachineSequence.start(b);
-				flipLever(b);
-			}
+			if ((b.getState().getRawData() & 0x8) == 0) SlotMachineSequence.start(b);
 		}
 	}
 	
-	public static void flipLever(final Block b) {
-		Global.plugin.getServer().getScheduler().runTaskLater(Global.plugin,new Runnable() {
-		    @Override 
-		    public void run() {
-		    	b.setData((byte)(b.getData()+8),true);
-		    }
-		}, 20L);
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent e) {
+		if(SlotMachine.isSlotMachinePart(e.getBlock())) {
+			e.setCancelled(true);
+			return;
+		}
 	}
 }

@@ -9,11 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class CommandHandler implements CommandExecutor {
-	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		Class<? extends Commands> c = new Commands().getClass(); 
 		CommandEvent ce = new CommandEvent(sender,command,label,args);
-
+		
 		Class<?> commandClass = null;
 
 		for(Class<?> cl : c.getClasses()) {
@@ -39,7 +38,10 @@ public class CommandHandler implements CommandExecutor {
 
 		if(commandMethod == null) {
 			for(Method m : commandClass.getMethods()) {
-				if(m.getName().equalsIgnoreCase("__default")) commandMethod = m;
+				if(m.getName().equalsIgnoreCase("__default")) {
+					commandMethod = m;
+					sender.sendMessage(commandMethod.getName());
+				}
 				break;
 			}
 			if(commandMethod == null) {
