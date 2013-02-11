@@ -14,7 +14,7 @@ public class Events implements Listener {
 	@EventHandler
 	public void onPull(PlayerInteractEvent e) {
 		Block b = e.getClickedBlock();
-		if(e.getAction() == Action.RIGHT_CLICK_BLOCK && b.getType() == Material.LEVER){
+		if(e.getAction() == Action.RIGHT_CLICK_BLOCK && b.getType() == Material.LEVER && SlotMachine.isSlotMachinePart(e.getClickedBlock())){
 			if(SlotMachineSequence.isRunning(b)) {
 				e.getPlayer().sendMessage(ChatColor.RED + "This slot machine is currently in use.");
 				e.setCancelled(true);

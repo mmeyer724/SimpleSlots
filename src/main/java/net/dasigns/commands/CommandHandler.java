@@ -40,7 +40,6 @@ public class CommandHandler implements CommandExecutor {
 			for(Method m : commandClass.getMethods()) {
 				if(m.getName().equalsIgnoreCase("__default")) {
 					commandMethod = m;
-					sender.sendMessage(commandMethod.getName());
 				}
 				break;
 			}

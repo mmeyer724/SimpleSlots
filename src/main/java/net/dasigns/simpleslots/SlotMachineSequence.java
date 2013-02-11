@@ -11,6 +11,7 @@ public class SlotMachineSequence {
 	private static HashMap<Block,Boolean> running = new HashMap<Block,Boolean>();
 	
 	public static void start(Block b) {
+		if(!SlotMachine.isSlotMachinePart(b)) return;
 		setRunning(b,true);
 		
 		final SlotMachine slot = SlotMachine.getFromLever(b);

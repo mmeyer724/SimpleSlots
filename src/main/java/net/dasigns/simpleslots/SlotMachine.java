@@ -77,7 +77,10 @@ public class SlotMachine {
 	}
 	
 	public static SlotMachine getFromLever(Block b) {
-		Set<String> keys = Global.config.getConfigurationSection("machines").getKeys(false);
+		Set<String> keys = null;
+		try {
+			keys = Global.config.getConfigurationSection("machines").getKeys(false);
+		} catch(Exception e) { return null; }
 		for(String k : keys) {
 			String parentNode = "machines."+k;
 			String leverNode = parentNode+".leverLoc";
@@ -91,7 +94,10 @@ public class SlotMachine {
 	}
 	
 	public static Boolean isSlotMachinePart(Block b) {
-		Set<String> keys = Global.config.getConfigurationSection("machines").getKeys(false);
+		Set<String> keys = null;
+		try {
+			keys = Global.config.getConfigurationSection("machines").getKeys(false);
+		} catch(Exception e) { return false; }
 		for(String k : keys) {
 			SlotMachine s = new SlotMachine(k);
 			if(s.getFirstItemFrame().equals(b.getLocation())) return true;
