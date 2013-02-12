@@ -37,7 +37,8 @@ public class SlotMachineSequence {
 			for(int j=0;j<10;j++) {
 				final ItemFrame frame = ItemFrameHelper.getFrame(slot.getItemFrame(i).getBlock());
 				Global.plugin.getServer().getScheduler().runTaskLater(Global.plugin,new Runnable() {
-				    public void run() {
+				    @Override
+					public void run() {
 				    	Random r = new Random();
 				    	Integer random = r.nextInt(type.getItems().size());
 				    	ItemStack randomItem = type.getItems().get(random);

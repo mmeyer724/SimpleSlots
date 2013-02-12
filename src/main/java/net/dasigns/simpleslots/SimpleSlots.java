@@ -14,6 +14,9 @@ public class SimpleSlots extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		//Setup plugin
+		Global.plugin = this;
+		
 		//Setup logger
 		Global.log = this.getLogger();
 		
