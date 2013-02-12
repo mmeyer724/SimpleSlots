@@ -22,7 +22,7 @@ public class SimpleSlots extends JavaPlugin {
 		
 		//Setup config
 		ConfigAccessor ca = new ConfigAccessor(this,"config.yml");
-		Global.config = ca.getConfig();
+		Global.configa = ca;
 		
 		//Setup Vault
 		VaultManager vm = new VaultManager(this);

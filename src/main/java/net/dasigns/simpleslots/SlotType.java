@@ -24,23 +24,23 @@ public class SlotType {
 		String typeNode = "types."+type;
 		String rewardNode = typeNode+".reward";
 		
-		cost = Global.config.getInt(typeNode + ".cost");
+		cost = Global.config().getInt(typeNode + ".cost");
 		
 		Set<String> keys = null;
-		keys = Global.config.getConfigurationSection(rewardNode).getKeys(false);
+		keys = Global.config().getConfigurationSection(rewardNode).getKeys(false);
 		for(String k : keys) {
 			String[] data = k.split(",");
 			ItemStack match = null;
 			if(data.length < 2) break;
 			if(data.length == 2) match = new ItemStack(Integer.parseInt(data[0]),1,Short.parseShort(data[1]));
 			
-			reward.put(match,Global.config.getInt(rewardNode+"."+k+".money"));
-			fireworks.put(match,Global.config.getInt(rewardNode+"."+k+".fireworks"));
-			cmds.put(match,new ArrayList<String>(Global.config.getStringList(rewardNode+"."+k+".cmd")));
+			reward.put(match,Global.config().getInt(rewardNode+"."+k+".money"));
+			fireworks.put(match,Global.config().getInt(rewardNode+"."+k+".fireworks"));
+			cmds.put(match,new ArrayList<String>(Global.config().getStringList(rewardNode+"."+k+".cmd")));
 		}
 		
-		for(Integer w : Global.config.getIntegerList(typeNode+".items")) {
-			for(String s: Global.config.getStringList(typeNode+".items."+w)) {
+		for(Integer w : Global.config().getIntegerList(typeNode+".items")) {
+			for(String s: Global.config().getStringList(typeNode+".items."+w)) {
 				String[] data = s.split(",");
 				ItemStack i = null;
 				if(data.length < 2) break;
@@ -77,6 +77,6 @@ public class SlotType {
 	}
 	
 	public static Boolean slotTypeExists(String type) {
-		return Global.config.contains("types."+type);
+		return Global.config().contains("types."+type);
 	}
 }

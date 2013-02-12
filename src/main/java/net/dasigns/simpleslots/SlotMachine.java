@@ -21,17 +21,17 @@ public class SlotMachine {
 		String leverNode = parentNode+".leverLoc";
 		String[] xyz = new String[] {"x","y","z"};
 		
-		type = Global.config.getString(parentNode+".type");
-		world = Global.plugin.getServer().getWorld(Global.config.getString(parentNode+".world"));
+		type = Global.config().getString(parentNode+".type");
+		world = Global.plugin.getServer().getWorld(Global.config().getString(parentNode+".world"));
 		
 		for(int i=1;i<=3;i++) {
 			ArrayList<Integer> c = new ArrayList<Integer>();
-			for(String s:xyz) c.add(Global.config.getInt(frameNode+"."+s+i));
+			for(String s:xyz) c.add(Global.config().getInt(frameNode+"."+s+i));
 			locs.add(new Location(world,c.get(0),c.get(1),c.get(2)));
 		}
 		
 		ArrayList<Integer> c = new ArrayList<Integer>();
-		for(String s:xyz) c.add(Global.config.getInt(leverNode+"."+s));
+		for(String s:xyz) c.add(Global.config().getInt(leverNode+"."+s));
 		locs.add(new Location(world,c.get(0),c.get(1),c.get(2)));
 	}
 	
@@ -73,21 +73,21 @@ public class SlotMachine {
 	}
 	
 	public static Boolean slotMachineExists(String name) {
-		return Global.config.contains("machines."+name);
+		return Global.config().contains("machines."+name);
 	}
 	
 	public static SlotMachine getFromLever(Block b) {
 		Set<String> keys = null;
 		try {
-			keys = Global.config.getConfigurationSection("machines").getKeys(false);
+			keys = Global.config().getConfigurationSection("machines").getKeys(false);
 		} catch(Exception e) { return null; }
 		for(String k : keys) {
 			String parentNode = "machines."+k;
 			String leverNode = parentNode+".leverLoc";
-			World world = Global.plugin.getServer().getWorld(Global.config.getString(parentNode+".world"));
+			World world = Global.plugin.getServer().getWorld(Global.config().getString(parentNode+".world"));
 			ArrayList<Integer> c = new ArrayList<Integer>();
 			String[] xyz = new String[] {"x","y","z"};
-			for(String s:xyz) c.add(Global.config.getInt(leverNode+"."+s));
+			for(String s:xyz) c.add(Global.config().getInt(leverNode+"."+s));
 			if(new Location(world,c.get(0),c.get(1),c.get(2)).equals(b.getLocation())) return new SlotMachine(k);
 		}
 		return null;
@@ -96,7 +96,7 @@ public class SlotMachine {
 	public static Boolean isSlotMachinePart(Block b) {
 		Set<String> keys = null;
 		try {
-			keys = Global.config.getConfigurationSection("machines").getKeys(false);
+			keys = Global.config().getConfigurationSection("machines").getKeys(false);
 		} catch(Exception e) { return false; }
 		for(String k : keys) {
 			SlotMachine s = new SlotMachine(k);

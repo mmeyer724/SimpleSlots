@@ -10,5 +10,9 @@ public class Global {
 	public static SimpleSlots plugin;
 	public static VaultManager vault;
 	public static File dataFolder;
-	public static FileConfiguration config;
+	public static ConfigAccessor configa;
+	public static FileConfiguration config() {
+		if(configa == null) return null;
+		return configa.getConfig();
+	}
 }

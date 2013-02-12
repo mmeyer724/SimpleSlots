@@ -1,1 +1,31 @@
-foo: bar
+machines:
+  someMachine:
+    type: basic
+    world: world
+    leverLoc:
+      x: 1
+      y: 1
+      z: 1
+    frameLocs:
+      x1: 1
+      y1: 1
+      z1: 1
+      x2: 1
+      y2: 1
+      z2: 1
+      x3: 1
+      y3: 1
+      z3: 1
+types:
+  basic:
+    cost: 100
+    items:
+      80:
+        - 35,0
+        - 36,0
+        - 37,0
+    reward:
+      35,0:
+        money: 500
+        cmd: say Congratz on winning
+        fireworks: 2
