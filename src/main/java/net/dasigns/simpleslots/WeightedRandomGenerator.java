@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class WeightedRandomGenerator {
-	private Random r = new Random();
+	private static Random r = new Random();
 	
 	private ArrayList<Object> selection = new ArrayList<Object>();
 	private ArrayList<Integer> weight = new ArrayList<Integer>();
@@ -19,15 +19,34 @@ public class WeightedRandomGenerator {
 	public void add(Object item, Integer weight) {
 		this.selection.add(item);
 		this.weight.add(weight);
-		if(this.weightsum.size() == 0) this.weightsum.add(weight); 
-		else this.weightsum.add(this.weightsum.get(this.weightsum.size()-1) + weight);
+
+		if(this.weightsum.size() == 0) {
+			this.weightsum.add(weight); 
+		} else {
+			this.weightsum.add(this.weightsum.get(this.weightsum.size()-1) + weight);
+		}	
 	}
 	
 	public Object next() {
-		if(this.selection.size() == 0 || this.weight.size() == 0 || this.weightsum.size() == 0) return null;
-		Integer j = r.nextInt(this.weightsum.get(this.weightsum.size()-1));
-		Integer i;
-		for(i = 0; j > this.weightsum.get(i); i++);
+		if(this.selection.size() == 0) {
+			return null;
+		}
+
+		if(this.weight.size() == 0) {
+			return null;
+		}
+
+		if(this.weightsum.size() == 0) {
+			return null;
+		}
+
+
+		int i = 0;
+		int j = r.nextInt(this.weightsum.get(this.weightsum.size()-1));
+		while{j > this.weightsum.get(i)}{
+			i++;
+		}
+
 		return this.selection.get(i);
 	}
 	
