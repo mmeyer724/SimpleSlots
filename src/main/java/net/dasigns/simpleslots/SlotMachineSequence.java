@@ -10,6 +10,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class SlotMachineSequence {
+    	private static final Random PRNG = new Random();
+
 	private static HashMap<Block,Boolean> running = new HashMap<Block,Boolean>();
 	
 	public static void start(Block b,Player p) {
@@ -39,8 +41,7 @@ public class SlotMachineSequence {
 				Global.plugin.getServer().getScheduler().runTaskLater(Global.plugin,new Runnable() {
 				    @Override
 					public void run() {
-				    	Random r = new Random();
-				    	Integer random = r.nextInt(type.getItems().size());
+				    	int random = PRNG.nextInt(type.getItems().size());
 				    	ItemStack randomItem = type.getItems().get(random);
 				    	frame.setItem(randomItem);
 				    }
